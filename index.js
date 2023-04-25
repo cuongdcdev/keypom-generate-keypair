@@ -1,8 +1,8 @@
 const { KeyPair } = require("near-api-js");
 
 const express = require('express')
-
 const app = express()
+app.use(cors())
 const PORT = 4000
 
 app.listen(PORT, () => {
