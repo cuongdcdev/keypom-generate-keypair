@@ -1,5 +1,6 @@
 const { KeyPair } = require("near-api-js");
 const cors = require("cors");
+import { hashPassword } from "@keypom/core";
 const express = require('express')
 const app = express()
 app.use(cors())
