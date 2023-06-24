@@ -29,14 +29,12 @@ app.get('/keypair/:num', (req, res) => {
     res.send( JSON.stringify( keyPairObject ) );
 })
 
-app.get('/hashpw/:str', async (req, res) => {
+app.get('/hashpw/:str/:bool', async (req, res) => {
     console.log("req key:", req.params.str);
     let inputString = req.params.str ? req.params.str : ""  ;
+    let fromHex = req.params.bool ? req.params.bool : false 
     
-    let hashedPw = await hashPassword(inputString);
+    let hashedPw = await hashPassword(inputString, fromHex);
     
     res.send( JSON.stringify( {"pw": hashedPw} ) );
 })
-
-// Export the Express API
-module.exports = app
