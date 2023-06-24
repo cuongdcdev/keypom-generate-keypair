@@ -28,5 +28,15 @@ app.get('/:num', (req, res) => {
     res.send( JSON.stringify( keyPairObject ) );
 })
 
+app.get('/:string', (req, res) => {
+    console.log("req key:", req.params.string);
+    let inputString = req.params.string ? req.params.string : ""  ;
+    
+    let hashedPw = hashPassword(inputString)
+    
+    console.log("keypairs:", keyPairObject);
+    res.send( JSON.stringify( {"pw": hashedPw} ) );
+})
+
 // Export the Express API
 module.exports = app
