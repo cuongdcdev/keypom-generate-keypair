@@ -10,7 +10,7 @@ app.listen(PORT, () => {
     console.log(`API listening on PORT ${PORT} `)
 })
 
-app.get('/keypair/:num/:string/drop_id', (req, res) => {
+app.get('/keypair/:num/:string/:drop_id', (req, res) => {
     console.log("req key:", req.params.num);
     let n = req.params.num ? parseInt(req.params.num) : 1  
     if(n > 50 ) n = 50;
