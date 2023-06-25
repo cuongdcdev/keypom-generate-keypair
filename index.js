@@ -10,11 +10,12 @@ app.listen(PORT, () => {
     console.log(`API listening on PORT ${PORT} `)
 })
 
-app.get('/keypair/:num/:string', (req, res) => {
+app.get('/keypair/:num/:string/drop_id', (req, res) => {
     console.log("req key:", req.params.num);
     let n = req.params.num ? parseInt(req.params.num) : 1  
     if(n > 50 ) n = 50;
     let rootEntropy = req.params.string ? req.params.string : "rootEntropy"  ;
+    let dropId = req.params.drop_id ? req.params.drop_id : ""  ;
     let keyPairObject = [];
     // Array of [0, 1, 2, ... , n-1]
     // allows keyId to be used as metaentropy later
