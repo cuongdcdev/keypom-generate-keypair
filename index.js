@@ -18,7 +18,7 @@ app.get('/keypair/:num/:string', (req, res) => {
     let keyPairObject = [];
     // Array of [0, 1, 2, ... , n-1]
     // allows keyId to be used as metaentropy later
-    let metaEntropy =  [...Array(n).keys()];
+    let metaEntropy =  Array.from({length: n}, (_, i) => `${dropId}_${i}`);
 
     let {keyPairs, publicKeys, secretKeys} = generateKeys({
         numKeys: n,
