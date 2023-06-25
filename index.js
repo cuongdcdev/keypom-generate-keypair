@@ -10,8 +10,8 @@ app.listen(PORT, () => {
     console.log(`API listening on PORT ${PORT} `)
 })
 
-app.get('/keypair/:num/:string/:drop_id', (req, res) => {
-    console.log("req key:", req.params.num);
+app.get('/keypair/:num/:string?/:drop_id?', async (req, res) => {
+ console.log("req key:", req.params.num);
     let n = req.params.num ? parseInt(req.params.num) : 1  
     if(n > 50 ) n = 50;
     let rootEntropy = req.params.string ? req.params.string : "rootEntropy"  ;
@@ -21,7 +21,7 @@ app.get('/keypair/:num/:string/:drop_id', (req, res) => {
     // allows keyId to be used as metaentropy later
     let metaEntropy =  Array.from({length: n}, (_, i) => `${dropId}_${i}`);
 
-    let {keyPairs, publicKeys, secretKeys} = generateKeys({
+    let {keyPairs, publicKeys, secretKeys} = await generateKeys({
         numKeys: n,
         rootEntropy,
         metaEntropy
@@ -38,10 +38,10 @@ app.get('/keypair/:num/:string/:drop_id', (req, res) => {
     res.send( JSON.stringify( keyPairObject ) );
 })
 
-app.get('/hashpw/:str/:bool', async (req, res) => {
-    console.log("req key:", req.params.str);
+app.get('/hashpw/:str/:bool?', async (req, res) => {
+    console.log("req key:" +  req.params.str + " hashedPw pass: " + req.params.bool );
     let inputString = req.params.str ? req.params.str : ""  ;
-    let fromHex = req.params.bool ? req.params.bool : false 
+    let fromHex = req.params.bool === "true" ? true : false 
     
     let hashedPw = await hashPassword(inputString, fromHex);
     
