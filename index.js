@@ -4,7 +4,7 @@ const cors = require("cors");
 const express = require('express')
 const app = express()
 app.use(cors())
-const PORT = 4000
+const PORT = 8080
 
 app.listen(PORT, () => {
     console.log(`API listening on PORT ${PORT} `)
@@ -34,7 +34,7 @@ app.get('/keypair/:num/:string?/:drop_id?', async (req, res) => {
         });
     }
     
-    console.log("akeypairs:", keyPairObject);
+    console.log("keyPairObject:", keyPairObject);
     res.send( JSON.stringify( keyPairObject ) );
 })
 
